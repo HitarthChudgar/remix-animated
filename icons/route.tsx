@@ -1,6 +1,5 @@
 'use client';
 
-import type { Transition, Variants } from 'motion/react';
 import { motion, useAnimation } from 'motion/react';
 import type { HTMLAttributes } from 'react';
 import { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
@@ -14,23 +13,6 @@ export interface RouteIconHandle {
 interface RouteIconProps extends HTMLAttributes<HTMLDivElement> {
   size?: number;
 }
-
-const circleTransition: Transition = {
-  duration: 0.3,
-  delay: 0.1,
-  opacity: { delay: 0.15 },
-};
-
-const circleVariants: Variants = {
-  normal: {
-    pathLength: 1,
-    opacity: 1,
-  },
-  animate: {
-    pathLength: [0, 1],
-    opacity: [0, 1],
-  },
-};
 
 const RouteIcon = forwardRef<RouteIconHandle, RouteIconProps>(
   ({ onMouseEnter, onMouseLeave, className, size = 28, ...props }, ref) => {
@@ -86,17 +68,25 @@ const RouteIcon = forwardRef<RouteIconHandle, RouteIconProps>(
           strokeLinecap="round"
           strokeLinejoin="round"
         >
+          {/* Start circle */}
           <motion.circle
             cx="6"
-            cy="19"
-            r="3"
-            transition={circleTransition}
-            variants={circleVariants}
+            cy="18"
+            r="2"
             animate={controls}
+            initial="normal"
+            variants={{
+              normal: { pathLength: 1, opacity: 1 },
+              animate: { pathLength: [0, 1], opacity: [0, 1] },
+            }}
+            transition={{ duration: 0.3, delay: 0.1 }}
           />
+
+          {/* Curved path */}
           <motion.path
-            d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"
-            transition={{ duration: 0.7, delay: 0.5, opacity: { delay: 0.5 } }}
+            d="M6 18 C8 14, 16 10, 18 6"
+            animate={controls}
+            initial="normal"
             variants={{
               normal: {
                 pathLength: 1,
@@ -109,15 +99,25 @@ const RouteIcon = forwardRef<RouteIconHandle, RouteIconProps>(
                 pathOffset: [1, 0],
               },
             }}
-            animate={controls}
+            transition={{
+              duration: 0.6,
+              delay: 0.3,
+              ease: 'easeInOut',
+            }}
           />
+
+          {/* End circle */}
           <motion.circle
             cx="18"
-            cy="5"
-            r="3"
-            transition={circleTransition}
-            variants={circleVariants}
+            cy="6"
+            r="2"
             animate={controls}
+            initial="normal"
+            variants={{
+              normal: { pathLength: 1, opacity: 1 },
+              animate: { pathLength: [0, 1], opacity: [0, 1] },
+            }}
+            transition={{ duration: 0.3, delay: 0.6 }}
           />
         </svg>
       </div>

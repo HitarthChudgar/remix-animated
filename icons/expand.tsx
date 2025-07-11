@@ -69,47 +69,30 @@ const ExpandIcon = forwardRef<ExpandIconHandle, ExpandIconProps>(
           width={size}
           height={size}
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          fill="currentColor"
         >
+          {/* Top-right arrow */}
           <motion.path
-            d="m21 21-6-6m6 6v-4.8m0 4.8h-4.8"
+            initial="normal"
+            animate={controls}
             transition={defaultTransition}
             variants={{
-              normal: { translateX: '0%', translateY: '0%' },
-              animate: { translateX: '2px', translateY: '2px' },
+              normal: { x: 0, y: 0 },
+              animate: { x: 2, y: -2 },
             }}
-            animate={controls}
+            d="M17.5858 5H14V3H21V10H19V6.41421L14.7071 10.7071L13.2929 9.29289L17.5858 5Z"
           />
+
+          {/* Bottom-left arrow */}
           <motion.path
-            d="M3 16.2V21m0 0h4.8M3 21l6-6"
+            initial="normal"
+            animate={controls}
             transition={defaultTransition}
             variants={{
-              normal: { translateX: '0%', translateY: '0%' },
-              animate: { translateX: '-2px', translateY: '2px' },
+              normal: { x: 0, y: 0 },
+              animate: { x: -2, y: 2 },
             }}
-            animate={controls}
-          />
-          <motion.path
-            d="M21 7.8V3m0 0h-4.8M21 3l-6 6"
-            transition={defaultTransition}
-            variants={{
-              normal: { translateX: '0%', translateY: '0%' },
-              animate: { translateX: '2px', translateY: '-2px' },
-            }}
-            animate={controls}
-          />
-          <motion.path
-            d="M3 7.8V3m0 0h4.8M3 3l6 6"
-            transition={defaultTransition}
-            variants={{
-              normal: { translateX: '0%', translateY: '0%' },
-              animate: { translateX: '-2px', translateY: '-2px' },
-            }}
-            animate={controls}
+            d="M3 14H5V17.5858L9.29289 13.2929L10.7071 14.7071L6.41421 19H10V21H3V14Z"
           />
         </svg>
       </div>

@@ -1,4 +1,5 @@
 'use client';
+
 import type { Variants } from 'motion/react';
 import { motion, useAnimation } from 'motion/react';
 import type { HTMLAttributes } from 'react';
@@ -14,23 +15,14 @@ interface ArrowRightIconProps extends HTMLAttributes<HTMLDivElement> {
   size?: number;
 }
 
-const pathVariants: Variants = {
-  normal: { d: 'M5 12h14' },
+const iconVariants: Variants = {
+  normal: { scaleX: 1, x: 0 },
   animate: {
-    d: ['M5 12h14', 'M5 12h9', 'M5 12h14'],
+    scaleX: [1, 0.9, 1],
+    x: [0, -3, 0],
     transition: {
       duration: 0.4,
-    },
-  },
-};
-
-const secondaryPathVariants: Variants = {
-  normal: { d: 'm12 5 7 7-7 7', translateX: 0 },
-  animate: {
-    d: 'm12 5 7 7-7 7',
-    translateX: [0, -3, 0],
-    transition: {
-      duration: 0.4,
+      ease: 'easeInOut',
     },
   },
 };
@@ -42,7 +34,6 @@ const ArrowRightIcon = forwardRef<ArrowRightIconHandle, ArrowRightIconProps>(
 
     useImperativeHandle(ref, () => {
       isControlledRef.current = true;
-
       return {
         startAnimation: () => controls.start('animate'),
         stopAnimation: () => controls.start('normal'),
@@ -83,21 +74,13 @@ const ArrowRightIcon = forwardRef<ArrowRightIconHandle, ArrowRightIconProps>(
           width={size}
           height={size}
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          fill="currentColor"
         >
           <motion.path
-            d="M5 12h14"
-            variants={pathVariants}
+            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+            initial="normal"
             animate={controls}
-          />
-          <motion.path
-            d="m12 5 7 7-7 7"
-            variants={secondaryPathVariants}
-            animate={controls}
+            variants={iconVariants}
           />
         </svg>
       </div>
